@@ -1,1 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAK Investment - Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            padding-bottom: 70px;
+        }
+        .nav-active {
+            color: #4f46e5;
+            position: relative;
+        }
+        .profile-card {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+        .menu-item {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .logout-btn {
+            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #f43f5e, #ef4444);
+        }
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+    </style>
+</head>
+<body class="max-w-md mx-auto">
+    <!-- Header -->
+    <div class="bg-white px-4 py-3 flex justify-between items-center shadow-sm">
+        <div class="flex items-center space-x-2">
+            <a href="/dashboard" class="text-gray-500">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <span class="font-semibold">My Account</span>
+        </div>
+        <div class="relative">
+            <button class="p-2 rounded-full hover:bg-gray-100">
+                <i class="fas fa-cog text-gray-500"></i>
+            </button>
+        </div>
+    </div>
 
+    <!-- Profile Section -->
+    <div class="profile-card text-white mx-4 my-4 p-6">
+        <div class="flex items-center space-x-4">
+            <div class="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                <span class="text-2xl font-bold"><%= user.username.charAt(0).toUpperCase() %></span>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold"><%= user.username %></h2>
+                <p class="text-indigo-100 text-sm"><%= user.email %></p>
+                <p class="text-indigo-100 text-sm mt-1">Member since <%= user.joinDate %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Stats -->
+    <div class="bg-white mx-4 my-3 rounded-lg shadow-sm overflow-hidden">
+        <div class="grid grid-cols-3 divide-x divide-gray-100 text-center py-3">
+            <div class="px-2">
+                <p class="text-gray-500 text-sm">Balance</p>
+                <p class="font-semibold">GHS <%= user.walletBalance %></p>
+            </div>
+            <div class="px-2">
+                <p class="text-gray-500 text-sm">Products</p>
+                <p class="font-semibold"><%= user.activeProducts || 0 %></p>
+            </div>
+            <div class="px-2">
+                <p class="text-gray-500 text-sm">Team</p>
+                <p class="font-semibold"><%= user.teamMembers || 0 %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Menu -->
+    <div class="bg-white mx-4 my-3 rounded-lg shadow-sm overflow-hidden">
+        <a href="/personal-info" class="menu-item flex items-center justify-between p-4 hover:bg-gray-50">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                    <i class="fas fa-user text-blue-600"></i>
+                </div>
+                <span>Personal Information</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </a>
+        
+        <a href="/change-password" class="menu-item flex items-center justify-between p-4 hover:bg-gray-50">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                    <i class="fas fa-key text-green-600"></i>
+                </div>
+                <span>Change Password</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </a>
+        
+        <a href="/invite" class="menu-item flex items-center justify-between p-4 hover:bg-gray-50">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                    <i class="fas fa-user-plus text-purple-600"></i>
+                </div>
+                <span>Invite Friends</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </a>
+        
+        <a href="/bank-details" class="menu-item flex items-center justify-between p-4 hover:bg-gray-50">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                    <i class="fas fa-university text-indigo-600"></i>
+                </div>
+                <span>Bank Details</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </a>
+        
+        <a href="/transactions" class="menu-item flex items-center justify-between p-4 hover:bg-gray-50">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+                    <i class="fas fa-exchange-alt text-amber-600"></i>
+                </div>
+                <span>Transaction History</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </a>
+        
+        <a href="/support" class="menu-item flex items-center justify-between p-4 hover:bg-gray-50">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                    <i class="fas fa-headset text-red-600"></i>
+                </div>
+                <span>Customer Support</span>
+            </div>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+        </a>
+    </div>
+
+    <!-- Logout Button -->
+    <div class="mx-4 my-4">
+        <button onclick="confirmLogout()" class="logout-btn w-full text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around items-center py-3">
+        <a href="/dashboard" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-home"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="/products" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-box"></i>
+            <span class="text-xs mt-1">Products</span>
+        </a>
+        <a href="/team" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-users"></i>
+            <span class="text-xs mt-1">Team</span>
+        </a>
+        <a href="/account" class="nav-active flex flex-col items-center">
+            <i class="fas fa-user"></i>
+            <span class="text-xs mt-1">Account</span>
+        </a>
+    </div>
+
+    <script>
+        // Highlight active nav item
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.bottom-nav a');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('nav-active');
+                }
+            });
+        });
+
+        function confirmLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '/logout';
+            }
+        }
+    </script>
+</body>
+</html>
