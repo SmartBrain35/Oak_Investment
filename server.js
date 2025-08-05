@@ -104,7 +104,6 @@ app.get('/signup', (req, res) => {
 // User Dashboard Route (Protected)
 app.get('/dashboard', authMiddleware, async (req, res) => {
   try {
-    // req.user is already populated by authMiddleware
     res.render('dashboard', { user: req.user, messages: req.flash() });
   } catch (err) {
     console.error('Dashboard render error:', err.message);
@@ -114,10 +113,11 @@ app.get('/dashboard', authMiddleware, async (req, res) => {
 });
 
 // Admin Dashboard Route (Protected and Admin-only)
+// Corrected: Route path should match the redirect from auth.js,
+// and render path should be relative to the 'views' directory, including the subfolder.
 app.get('/adminDashboard', authMiddleware, adminAuthMiddleware, async (req, res) => {
   try {
-    // req.user is already populated by authMiddleware
-    res.render('adminDashboard', { user: req.user, messages: req.flash() });
+    res.render('adminViews/adminDashboard', { user: req.user, messages: req.flash() });
   } catch (err) {
     console.error('Admin Dashboard render error:', err.message);
     req.flash('error', 'Could not load admin dashboard data.');
